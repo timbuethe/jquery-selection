@@ -2,8 +2,6 @@
  * jQuery Selection
  * Version 1.0
  * https://github.com/timbuethe/jquery-selection
- *
- * jQuery Javascript plugin which slides a webpage over to reveal an additional interaction pane.
  */
 ;(function( $ ){
 
