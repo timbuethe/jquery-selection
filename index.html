@@ -71,7 +71,6 @@ This is different from <a href="http://jqueryui.com/selectable/">jQuery UI selec
       
       createTable();
       
-      
       $('#calendar').selection({
           filter: 'td',
           stop: function(event, selection){
@@ -82,11 +81,10 @@ This is different from <a href="http://jqueryui.com/selectable/">jQuery UI selec
           
             $('#info')
                     .text('selected: ' + from + ' - ' + to)
-                    //.effect('highlight');
+                    .effect('highlight');
             $('#calendar').selection('clear');
           }
       });
-​
     </script>
 
   </body>
