@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="https://github.com/timbuethe/jquery-selection/blob/master/jquery.selection.css">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -35,6 +36,10 @@
 
 <p>jQuery selection is a jQuery plugin to make HTML elements selectable using the mouse. It marks all the elements between the one you started on and the one the mouse is over. This is useful when you want to select days in a calendar or something similar. 
 This is different from <a href="http://jqueryui.com/selectable/">jQuery UI selectable</a> where you draw a rectangle with the mouse to select elements.</p>
+
+          <table id="calendar"></table>
+          <span id="info"></span>​
+
         </section>
 
         <footer>
@@ -45,5 +50,44 @@ This is different from <a href="http://jqueryui.com/selectable/">jQuery UI selec
         
       </div>
     </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+  <script src="https://github.com/timbuethe/jquery-selection/blob/master/jquery.selection.js"></script>
+    <script>
+      function createTable(){
+
+          var $calendar = $('#calendar'),
+              $row,
+              monthDays = [null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      
+          for(var month=1; month <= 12; month++){
+              $row = $('<tr/>').appendTo($calendar);
+              for(var day=1; day <= monthDays[month]; day++){
+                $('<td/>').text(day).appendTo($row);
+              }
+            }
+      }
+      
+      createTable();
+      
+      
+      $('#calendar').selection({
+          filter: 'td',
+          stop: function(event, selection){
+          
+            var elements = selection.elements,
+                from = $(elements[0]).text(),
+                to = $(elements[elements.length-1]).text();
+          
+            $('#info')
+                    .text('selected: ' + from + ' - ' + to)
+                    //.effect('highlight');
+            $('#calendar').selection('clear');
+          }
+      });
+​
+    </script>
+
   </body>
 </html>
