@@ -1,6 +1,6 @@
 /*
  * jQuery Selection
- * Version 1.0
+ * Version 1.1
  * https://github.com/timbuethe/jquery-selection
  */
 ;(function( $ ){
@@ -137,10 +137,21 @@
          * Start selection
          */
         $selectionContainer.on('mousedown', settings.filter, function(){
+
+          // ignore all but primary mouse clicks (left click)
+          if(event.which !== 1){
+            return;
+          }
+
           settings.start(this);
           $selectionContainer.data('selection-selecting', true);
           firstSelectedValue = settings.value(this);
           firstSelectedGroup = settings.group(this);
+
+          // directly select this element, useful when the user just clicks
+          // an element (instead of mousedown, drag, mouseup)
+          selectValuesBetween($selectables, firstSelectedValue, firstSelectedValue, firstSelectedGroup);
+          $(this).addClass('selection-over');
         });
 
         /**
