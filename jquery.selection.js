@@ -136,7 +136,7 @@
         /**
          * Start selection
          */
-        $selectionContainer.on('mousedown', settings.filter, function(){
+        $selectionContainer.on('mousedown', settings.filter, function(event){
 
           // ignore all but primary mouse clicks (left click)
           if(event.which !== 1){
